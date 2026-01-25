@@ -20,6 +20,11 @@ print(np1[even_filter])
 odd_filter = np1%2==1
 print(np1[odd_filter])
 
+# Filters don't explicitly HAVE to be pre-created
+print(np1[(np1>10) & (np1<100)]) # Creates 2 filters, connects logically
+
+
+# With own funcs, there is a hiccup
 def prime(n):
     for i in range(2, int(np.sqrt(n) + 1)):
         if n%i==0: return False
