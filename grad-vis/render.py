@@ -47,13 +47,13 @@ class GradientScene(ThreeDScene):
         x0, y0 = self.classic_path[0]
 
         ball_gd.move_to(
-            axes.c2p(x0, y0, self.func(x0, y0))
+            axes.c2p(x0, y0, self.func([x0, y0]))
         )
 
         x1, y1 = self.momentum_path[0]
 
         ball_momentum.move_to(
-            axes.c2p(x1, y1, self.func(x1, y1))
+            axes.c2p(x1, y1, self.func([x1, y1]))
         )
 
         self.add(ball_gd, ball_momentum)
@@ -68,7 +68,7 @@ class GradientScene(ThreeDScene):
             lambda u, v: axes.c2p(
                 u,
                 v,
-                func(u, v)
+                func([u, v])
             ),
             u_range=[-2, 2],
             v_range=[-2, 2],
@@ -127,12 +127,12 @@ class GradientScene(ThreeDScene):
 
     # Animate the paths of balls
     def animate_paths(self, axes, ball_gd, ball_momentum):
-        for p1, p2 in zip(ball_gd, ball_momentum):
-            x1,y1 = p1
-            x2,y2 = p2
+        for p1, p2 in zip(self.classic_path, self.momentum_path):
+            x1, y1 = p1
+            x2, y2 = p2
 
-            z1 = self.func(x1, y1)
-            z2 = self.func(x2, y2)
+            z1 = self.func([x1, y1])
+            z2 = self.func([x2, y2])
 
             self.play(
                 ball_gd.animate.move_to(
