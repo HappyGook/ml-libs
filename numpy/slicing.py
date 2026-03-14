@@ -17,3 +17,8 @@ np2d = np.array([
     [1,2,3,4,5],
     [4,5,6,7,8]])
 print(np2d[0:2, 3:5]) # 0:2 defines which rows (0 and 1), 3:5 which elements of a row
+
+# Example: reverse a 2d array
+# ::-1 for reverse (Slice from [len] to [0] with step -1)
+# first ::-1 inverses row order, second ::-1 inverses column order
+print(f"Reversed array \n{np2d[::-1,::-1]}")

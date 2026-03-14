@@ -1,9 +1,16 @@
 import numpy as np
 import optimizers as opt
 import functions as f
+import render as r
 
 # Run of the project
 
+configs = {
+    1: {"f": f.bowl, "grad": f.grad_bowl},
+    2: {"f": f.valley, "grad": f.grad_valley},
+    3: {"f": f.rosenbrock, "grad": f.grad_rb},
+    4: {"f": f.saddle, "grad": f.grad_saddle},
+}
 choice = 0
 while 1<=choice<=4:
     choice = int(input("Choose which surface function do you want to compute a descent for:\n"
@@ -15,64 +22,33 @@ while 1<=choice<=4:
 step_size = float(input("Step size: "))
 iterations = int(input("Number of iterations:"))
 alpha = float(input("Choose an alpha for momentum descent: "))
-x0 = np.array([2])
-x0[0] = float(input("Initial position (X):"))
-x0[1] = float(input("Initial position (Y):"))
+x0 = np.array([
+    float(input("Initial position (X): ")),
+    float(input("Initial position (Y): "))
+])
 
-if choice == 1:
-    classic_path = opt.classic_descent(
+cfg = configs[choice]
+gradient = cfg["grad"]
+func = cfg["f"]
+
+classic_path = opt.classic_descent(
+    x0,
+    step_size=step_size,
+    iters=iterations,
+    gradient=gradient
+)
+
+momentum_path = opt.momentum_descent(
         x0,
         step_size=step_size,
         iters=iterations,
-        gradient=f.grad_bowl
-    )
-    momentum_path = opt.momentum_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_bowl,
-        alpha=alpha
-    )
-elif choice == 2:
-    classic_path = opt.classic_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_valley
-    )
-    momentum_path = opt.momentum_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_valley,
-        alpha=alpha
-    )
-elif choice == 3:
-    classic_path = opt.classic_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_rb
-    )
-    momentum_path = opt.momentum_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_rb,
-        alpha=alpha
-    )
-elif choice == 4:
-    classic_path = opt.classic_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_saddle
-    )
-    momentum_path = opt.momentum_descent(
-        x0,
-        step_size=step_size,
-        iters=iterations,
-        gradient=f.grad_saddle,
+        gradient=gradient,
         alpha=alpha
     )
 
+print(f"Computed paths: "
+      f"\n Classic descent: {classic_path}"
+      f"\n Momentum descent: {momentum_path}")
+
+classic_path = np.load("classic.npy")
+momentum_path = np.load("momentum.npy")
