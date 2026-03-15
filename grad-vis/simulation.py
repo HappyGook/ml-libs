@@ -3,6 +3,48 @@ import optimizers as opt
 import functions as f
 import render as r
 from manim import tempconfig
+import matplotlib.pyplot as plt
+
+
+# Additional matplotlib render
+def render_paths(function, classic, momentum):
+
+    x,y = np.meshgrid(np.linspace(-2,2,300),np.linspace(-2,2,300))
+    z = np.vectorize(lambda u, v: function([u, v]))(x, y)
+
+    fig, ax = plt.subplots(figsize=(6,6))
+
+    # Filled contour
+    contour = ax.contourf(x, y, z, levels=40, cmap='RdYlGn_r')
+    fig.colorbar(contour, ax=ax, label='Loss')
+    ax.contour(x,y,z, levels=15, colors='white', linewidths=0.4, alpha=0.4)
+
+    # Plot the paths
+    ax.plot(
+        classic[:, 0], classic[:, 1],
+        color='dodgerblue', marker='o', markersize=3,
+        linewidth=1.5, label='Gradient descent', zorder=5
+    )
+    ax.plot(
+        momentum[:, 0], momentum[:, 1],
+        color='tomato', marker='o', markersize=3,
+        linewidth=1.5, label='Momentum', zorder=5
+    )
+
+    # Mark start and end
+    ax.scatter(*classic[0], color='white', s=60, zorder=6, edgecolors='dodgerblue', linewidths=1.5)
+    ax.scatter(*classic[-1], color='dodgerblue', s=80, marker='*', zorder=6)
+    ax.scatter(*momentum[-1], color='tomato', s=80, marker='*', zorder=6)
+
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_title('Optimization paths (2D view)')
+    ax.legend()
+    ax.set_aspect('equal')
+
+    plt.tight_layout()
+    plt.savefig('paths_2d.png', dpi=150)
+    plt.show()
 
 # Run of the project
 
@@ -50,6 +92,8 @@ momentum_path = opt.momentum_descent(
 print(f"Computed paths: "
       f"\n Classic descent: {classic_path}"
       f"\n Momentum descent: {momentum_path}")
+
+render_paths(func, classic_path, momentum_path)
 
 with tempconfig({
     "quality": "medium_quality",
