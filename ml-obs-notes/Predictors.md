@@ -95,3 +95,56 @@ For **fitting** to happen, the model class must have about the same complexity a
 **Probabilistic modelling** can be used to learn something about the un-observed distribution from the observed outcomes. E.g. to understand the unseen $p(y)$ from the dataset $\mathcal{X}$, which is formed by $p(x|y)$.
 
 A probabilistic model is specified by the joint distribution of all random variables. The joint distribution $p(x,\theta)$ of the observed $x$ and hidden params $\theta$ encapsulates the information from the prior, likelihood, marginal likelihood $p(x)$, and the posterior (obtained by dividing the joint by the marginal likelihood).
+
+By optimising for the posterior $p(x|\theta)$, the information about the distribution of $\theta$ gets lost. Therefore, to get the full posterior distribution (so not the maximum, and rather the whole distribution), the Bayesian inference is used:
+	$p(\mathbb{\theta}|\mathcal{X})=\cfrac{p(\mathcal{X}|\mathbb{\theta}) p(\mathbb{\theta})}{p(\mathcal{X})}$  , where $p(\mathcal{X})=\int p(\mathcal{X}|\mathbb{\theta}) p(\mathbb{\theta}) d\theta$  
+The Bayesian theorem is used to invert the relation between $\theta$ and $\mathcal{X}$, to obtain the posterior distribution.
+
+By finding posterior and $p(\theta)$, the uncertainty can be propagated from the parameters to the data, and predictors get the form:
+	$p(x)=\int p(x|\mathbb{\theta}) p(\mathbb{\theta}) d\theta = \mathbb{E}_{\theta}[p(x|\theta)]$  
+Here, the prediction is the average over all plausible parameter values $\theta$ (plausibility determined by distribution $p(\theta)$)
+
+## Latent variables
+
+Latent variables $z$ are added to the model, while not directly parametrizing it like $\theta$. They can help model be more interpretable, simplify its structure without precision losses, but generally make learning harder.
+
+For data $x$, model params $\theta$ and latent variables $z$, the conditional distribution looks like
+	$p(x|z,\theta)$ 
+
+In such model, to find the predictive function based on parameters, latent variables need to be marginalised via putting a prior on them ( $p(z)$ ) and integrating:
+	$p(x|\theta)=\int p(x|z,\mathbb{\theta}) p(z) dz$ <--- as stated, likelihood must not depend on $z$
+
+The posterior distribution is then found the same way with Bayes' 
+
+Similar to the posterior on parameters $\theta$, the posterior on $z$ is computed via Bayes'
+	$p(z|\mathcal{X})=\cfrac{p(\mathcal{X}|z) p(z)}{p(\mathcal{X})}$,    $p(\mathcal{X}|z)=\int p(\mathcal{X}|z,\mathbb{\theta}) p(\mathbb{\theta}) d\theta$ 
+
+Because of the computing difficulty, both model params and latent vars can't be both marginalised at the same time. Easier computed is the posterior distribution on the latent vars $z$, conditioned by params $\theta$ :
+	$p(z|\mathcal{X}, \theta)=\cfrac{p(\mathcal{X}|z,\theta) p(z)}{p(\mathcal{X}|\theta)}$ 
+
+**Some more context to the usage**: latent variables allow us to simplify the model by assuming: "conditioned on the situation $z$, the model is simple". By this the parameters don't have to be overcomplicated to explain the data.
+
+Diagram as an example
+![[latent_vars.svg|510]]
+## Graphs to visualise dependencies
+
+The joint distribution $p(a,b,c)$ doesn't tell anything about the independence relations of distributions. A way to show this is to construct a directed graph.
+
+E.g. for the joint distribution $p(a,b,c)=p(c|a,b) p(b|a) p(a)$ the graph would look like
+	$(a) \longrightarrow (b)$ 
+	   $\searrow$     $\swarrow$
+		 $(c)$ 
+Is also fully connected
+
+The joint distribution can also be extracted from the graph, like:
+	$p(x) = \displaystyle\Pi_{k=1}^K p(x_k|Pa_k)$, where $Pa_k$ means the parent nodes of $x_k$, i.e. the nodes that have arrows pointing to $x_k$ 
+
+Conditional independence and d-Separation can also be portrayed via directed graphs.
+There are 3 main types of probabilistic graphical models: 
+- Directed graphical models (Bayesian networks)
+- Undirected graphical models (Markov random fields)
+- Factor graphs
+
+
+## Model Selection
+

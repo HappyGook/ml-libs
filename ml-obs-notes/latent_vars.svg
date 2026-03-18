@@ -1,0 +1,74 @@
+<svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: sans-serif; }
+      .th { font-size: 14px; font-weight: 500; fill: #1a1a18; }
+      .ts { font-size: 12px; font-weight: 400; fill: #5f5e5a; }
+      .box { fill: #ffffff; stroke: #b4b2a9; }
+      .arr { stroke: #000000; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="20" y="40" width="290" height="265" rx="8" class="box" stroke-width="0.5"/>
+  <rect x="370" y="40" width="290" height="265" rx="8" class="box" stroke-width="0.5"/>
+  <text class="th" x="165" y="30" text-anchor="middle">Observed x</text>
+  <text class="th" x="515" y="30" text-anchor="middle">After inferring z</text>
+  <line x1="318" y1="172" x2="362" y2="172" class="arr" marker-end="url(#arrow)"/>
+  <text class="ts" x="340" y="163" text-anchor="middle">infer</text>
+  <text class="ts" x="340" y="180" text-anchor="middle">p(z|x,θ)</text>
+
+  <!-- Uncolored points (left panel) -->
+  <circle cx="95" cy="245" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="112" cy="232" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="82" cy="258" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="118" cy="252" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="102" cy="220" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="130" cy="262" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="228" cy="98" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="246" cy="112" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="216" cy="85" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="253" cy="94" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="238" cy="122" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="262" cy="103" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="168" cy="175" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="184" cy="164" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="156" cy="188" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="178" cy="196" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="153" cy="163" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+  <circle cx="194" cy="180" r="4.5" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+
+  <!-- Cluster ellipses (right panel) -->
+  <ellipse cx="450" cy="243" rx="44" ry="34" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.8"/>
+  <ellipse cx="598" cy="100" rx="44" ry="34" fill="#FAECE7" stroke="#993C1D" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.8"/>
+  <ellipse cx="524" cy="178" rx="44" ry="34" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.8"/>
+
+  <!-- Colored points (right panel) — z=1 purple -->
+  <circle cx="445" cy="245" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <circle cx="462" cy="232" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <circle cx="432" cy="258" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <circle cx="468" cy="252" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <circle cx="452" cy="220" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <circle cx="480" cy="262" r="4.5" fill="#7F77DD" stroke="#534AB7" stroke-width="0.8"/>
+  <!-- z=3 coral -->
+  <circle cx="578" cy="98" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <circle cx="596" cy="112" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <circle cx="566" cy="85" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <circle cx="603" cy="94" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <circle cx="588" cy="122" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <circle cx="612" cy="103" r="4.5" fill="#D85A30" stroke="#993C1D" stroke-width="0.8"/>
+  <!-- z=2 teal -->
+  <circle cx="518" cy="175" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+  <circle cx="534" cy="164" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+  <circle cx="506" cy="188" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+  <circle cx="528" cy="196" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+  <circle cx="503" cy="163" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+  <circle cx="544" cy="180" r="4.5" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.8"/>
+
+  <!-- Legend labels -->
+  <text class="ts" x="420" y="292" fill="#3C3489">z = 1</text>
+  <text class="ts" x="496" y="220" fill="#085041">z = 2</text>
+  <text class="ts" x="572" y="148" fill="#712B13">z = 3</text>
+</svg>
